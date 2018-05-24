@@ -834,7 +834,9 @@ class assign_grading_table extends table_sql implements renderable {
      * @return string
      */
     public function col_picture(stdClass $row) {
-        return $this->output->user_picture($row);
+        global $DB, $OUTPUT;
+        $user = $DB->get_record('user', array('id' => $row->userid));
+        return $OUTPUT->user_picture($user);
     }
 
     /**

@@ -2212,3 +2212,6 @@ $string['sectionusedefaultname'] = 'Use default section name';
 $string['publish'] = 'Publish';
 $string['extendenrol'] = 'Extend enrolment (individual)';
 $string['groupextendenrol'] = 'Extend enrolment (common)';
+
+// KEEP strings
+$string['editkeepprofile'] = 'Edit your profile on KEEP';

@@ -70,6 +70,8 @@ class user_edit_form extends moodleform {
         $mform->addElement('hidden', 'course', $COURSE->id);
         $mform->setType('course', PARAM_INT);
 
+        $mform->addElement('html', '<div class="fitem"><a href="https://account.keep.edu.hk/account/profile" target="_blank">' . get_string('editkeepprofile') . '</a></div>');
+
         // Print the required moodle fields first.
         $mform->addElement('header', 'moodle', $strgeneral);
 
@@ -131,13 +133,17 @@ class user_edit_form extends moodleform {
             }
 
             // Print picture.
-            $context = context_user::instance($user->id, MUST_EXIST);
-            $fs = get_file_storage();
-            $hasuploadedpicture = ($fs->file_exists($context->id, 'user', 'icon', 0, '/', 'f2.png') || $fs->file_exists($context->id, 'user', 'icon', 0, '/', 'f2.jpg'));
-            if (!empty($user->picture) && $hasuploadedpicture) {
+            if ($user->auth == 'saml') {
                 $imagevalue = $OUTPUT->user_picture($user, array('courseid' => SITEID, 'size' => 64));
             } else {
-                $imagevalue = get_string('none');
+	        $context = context_user::instance($user->id, MUST_EXIST);
+	        $fs = get_file_storage();
+	        $hasuploadedpicture = ($fs->file_exists($context->id, 'user', 'icon', 0, '/', 'f2.png') || $fs->file_exists($context->id, 'user', 'icon', 0, '/', 'f2.jpg'));
+	        if (!empty($user->picture) && $hasuploadedpicture) {
+	            $imagevalue = $OUTPUT->user_picture($user, array('courseid' => SITEID, 'size' => 64));
+	        } else {
+	            $imagevalue = get_string('none');
+	        }
             }
             $imageelement = $mform->getElement('currentpicture');
             $imageelement->setValue($imagevalue);

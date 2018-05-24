@@ -339,7 +339,7 @@ class user_picture implements renderable {
      * @return moodle_url
      */
     public function get_url(moodle_page $page, renderer_base $renderer = null) {
-        global $CFG;
+        global $CFG, $DB;
 
         if (is_null($renderer)) {
             $renderer = $page->get_renderer('core');
@@ -379,6 +379,23 @@ class user_picture implements renderable {
             // All deleted users should have email replaced by md5 hash,
             // all active users are expected to have valid email.
             return $defaulturl;
+        }
+
+        $auth;
+        $keepid;
+        if (isset($this->user->auth)) {
+            $auth = $this->user->auth;
+            $keepid = $this->user->username;
+        } else {
+            $user = $DB->get_record('user', array('id' => $this->user->id));
+            $auth = $user->auth;
+            $keepid = $user->username;
+        }
+        if ($auth == 'saml') {
+            // Why is this a SQL query and not a call to some PHP function? Does this only encrypt an id?
+            $password = file_get_contents('/run/secrets/moodle_keepaccountapi_password');
+            $result = $DB->get_record_sql('SELECT HEX(AES_ENCRYPT("'. $keepid . '", "' . $password . '")) AS enckeepid;');
+            return new moodle_url('https://account.keep.edu.hk/api/pub/picture/' . $result->enckeepid);
         }
 
         // Did the user upload a picture?

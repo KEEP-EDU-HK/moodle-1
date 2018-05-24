@@ -23,7 +23,7 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 echo $OUTPUT->header();
 
-$rs = $DB->get_recordset_select("user", "deleted = 0 AND picture > 0", array(), "lastaccess DESC", user_picture::fields());
+$rs = $DB->get_recordset_select("user", "deleted = 0 AND (picture > 0 OR auth = 'saml')", array(), "lastaccess DESC", user_picture::fields());
 foreach ($rs as $user) {
     $fullname = fullname($user);
     echo "<a href=\"$CFG->wwwroot/user/view.php?id=$user->id&amp;course=1\" ".
