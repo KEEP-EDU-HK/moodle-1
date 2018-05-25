@@ -116,4 +116,9 @@ if ($ADMIN->fulltree) {
             get_string('sendcoursewelcomemessage_help', 'enrol_self'),
             ENROL_SEND_EMAIL_FROM_COURSE_CONTACT,
             enrol_send_welcome_email_options()));
+
+    $settings->add(new admin_setting_configcheckbox(
+        'enrol_self/applycoursestartdate',
+        get_string('applycoursestartdate', 'enrol_self'),
+        get_string('applycoursestartdate_help', 'enrol_self'), 1));
 }

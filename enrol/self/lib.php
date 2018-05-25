@@ -148,7 +148,12 @@ class enrol_self_plugin extends enrol_plugin {
             return;
         }
 
-        $timestart = time();
+        if ($instance->customint7) {
+            $timestart = get_course($instance->courseid)->startdate;
+        } else {
+            $timestart = time();
+        }
+
         if ($instance->enrolperiod) {
             $timeend = $timestart + $instance->enrolperiod;
         } else {
@@ -186,7 +191,7 @@ class enrol_self_plugin extends enrol_plugin {
      * @return string html text, usually a form in a text box
      */
     public function enrol_page_hook(stdClass $instance) {
-        global $CFG, $OUTPUT, $USER;
+        global $CFG, $OUTPUT, $USER, $DB;
 
         require_once("$CFG->dirroot/enrol/self/locallib.php");
 
@@ -217,7 +222,19 @@ class enrol_self_plugin extends enrol_plugin {
         ob_start();
         $form->display();
         $output = ob_get_clean();
-        return $OUTPUT->box($output);
+
+        $enrol = $DB->get_record('user_enrolments', array('userid' => $USER->id, 'enrolid' => $instance->id));
+
+        if ($enrol && ($enrol->timestart > time())) {
+            if (empty($instance->customtext2)) {
+                $msg = get_string('customwaitingmessage_default', 'enrol_self', date('Y-m-d', $enrol->timestart));
+            } else {
+                $msg = $instance->customtext2;
+            }
+            return $OUTPUT->box($msg, 'alert alert-info') . (true === $enrolstatus? '' : $OUTPUT->box($output));
+        } else {
+            return $OUTPUT->box($output);
+        }
     }
 
     /**
@@ -238,7 +255,7 @@ class enrol_self_plugin extends enrol_plugin {
             }
             // Check if user is already enroled.
             if ($DB->get_record('user_enrolments', array('userid' => $USER->id, 'enrolid' => $instance->id))) {
-                return get_string('canntenrol', 'enrol_self');
+                return get_string('alreadyenrolled', 'enrol_self');
             }
         }
 
@@ -260,7 +277,7 @@ class enrol_self_plugin extends enrol_plugin {
         }
 
         if ($DB->record_exists('user_enrolments', array('userid' => $USER->id, 'enrolid' => $instance->id))) {
-            return get_string('canntenrol', 'enrol_self');
+            return get_string('alreadyenrolled', 'enrol_self');
         }
 
         if ($instance->customint3 > 0) {
@@ -356,6 +373,7 @@ class enrol_self_plugin extends enrol_plugin {
         $fields['customint4']      = $this->get_config('sendcoursewelcomemessage');
         $fields['customint5']      = 0;
         $fields['customint6']      = $this->get_config('newenrols');
+        $fields['customint7']      = $this->get_config('applycoursestartdate');
 
         return $fields;
     }
@@ -820,6 +838,9 @@ class enrol_self_plugin extends enrol_plugin {
         $options = array('cols' => '60', 'rows' => '8');
         $mform->addElement('textarea', 'customtext1', get_string('customwelcomemessage', 'enrol_self'), $options);
         $mform->addHelpButton('customtext1', 'customwelcomemessage', 'enrol_self');
+
+        $mform->addElement('advcheckbox', 'customint7', get_string('applycoursestartdate', 'enrol_self'));
+        $mform->addHelpButton('customtext2', 'customwaitingmessage', 'enrol_self');
 
         if (enrol_accessing_via_instance($instance)) {
             $warntext = get_string('instanceeditselfwarningtext', 'core_enrol');

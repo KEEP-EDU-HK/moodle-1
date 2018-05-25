@@ -122,3 +122,11 @@ If you have not done so already, you should edit your profile page so that we ca
 
   {$a->profileurl}';
 $string['privacy:metadata'] = 'The Self enrolment plugin does not store any personal data.';
+
+// KEEP
+$string['applycoursestartdate'] = 'Apply course start date as enrolment date';
+$string['applycoursestartdate_help'] = 'If enabled, the enrolment will start on the same date as the course start date.';
+$string['customwaitingmessage'] = 'Custom waiting message';
+$string['customwaitingmessage_help'] = 'Message to be displayed when the student has been enrolled but the course has not started yet.';
+$string['customwelcomemessage_default'] = 'This course will be available for your access on {$a}.';
+$string['alreadyenrolled'] = 'You are already enrolled in this course.';
