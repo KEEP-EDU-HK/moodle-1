@@ -31,3 +31,6 @@
 [submodule "moodle-theme_essential"]
 	path = theme/essential
 	url = https://github.com/gjb2048/moodle-theme_essential
+[submodule "keepenrolcsv"]
+	path = keepenrolcsv
+	url = https://github.com/KEEP-EDU-HK/keepenrolcsv
