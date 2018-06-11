@@ -28,3 +28,6 @@
 [submodule "daedalus"]
 	path = api
 	url = https://github.com/KEEP-EDU-HK/daedalus
+[submodule "moodle-theme_essential"]
+	path = theme/essential
+	url = https://github.com/gjb2048/moodle-theme_essential
