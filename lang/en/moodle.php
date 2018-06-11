@@ -2215,3 +2215,4 @@ $string['groupextendenrol'] = 'Extend enrolment (common)';
 
 // KEEP strings
 $string['editkeepprofile'] = 'Edit your profile on KEEP';
+$string['showbutnotlist'] = 'Show but not listed';
