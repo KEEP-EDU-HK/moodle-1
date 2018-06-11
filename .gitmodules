@@ -37,3 +37,6 @@
 [submodule "admin/tool/log/store/moodle-logstore_xapi"]
 	path = admin/tool/log/store/xapi
 	url = https://github.com/xAPI-vle/moodle-logstore_xapi
+[submodule "moodle-block_completion_progress"]
+	path = blocks/completion_progress
+	url = https://github.com/deraadt/moodle-block_completion_progress
