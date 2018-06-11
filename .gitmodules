@@ -22,3 +22,6 @@
 [submodule "moodle-enrol_autoenrol"]
 	path = enrol/autoenrol
 	url = https://github.com/bobopinna/moodle-enrol_autoenrol
+[submodule "auth/auth"]
+	path = auth/saml
+	url = https://github.com/moodle-saml/auth
