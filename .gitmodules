@@ -19,3 +19,6 @@
 [submodule "moodle-enrol_apply"]
 	path = enrol/apply
 	url = https://github.com/emeneo/moodle-enrol_apply
+[submodule "moodle-enrol_autoenrol"]
+	path = enrol/autoenrol
+	url = https://github.com/bobopinna/moodle-enrol_autoenrol
