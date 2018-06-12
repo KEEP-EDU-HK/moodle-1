@@ -10,3 +10,6 @@
 [submodule "moodle-local_mobile"]
 	path = local/mobile
 	url = https://github.com/moodlehq/moodle-local_mobile
+[submodule "keepcourselist"]
+	path = local/keepcourselist
+	url = https://github.com/KEEP-EDU-HK/keepcourselist
