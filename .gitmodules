@@ -7,3 +7,6 @@
 [submodule "local/moodle-local_youtube_events"]
 	path = local/youtube_events
 	url = https://github.com/KEEP-EDU-HK/moodle-local_youtube_events
+[submodule "moodle-local_mobile"]
+	path = local/mobile
+	url = https://github.com/moodlehq/moodle-local_mobile
