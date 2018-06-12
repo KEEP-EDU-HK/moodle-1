@@ -16,3 +16,6 @@
 [submodule "moodle-filter_videoeasy"]
 	path = filter/videoeasy
 	url = https://github.com/justinhunt/moodle-filter_videoeasy
+[submodule "moodle-enrol_apply"]
+	path = enrol/apply
+	url = https://github.com/emeneo/moodle-enrol_apply
