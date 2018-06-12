@@ -13,3 +13,6 @@
 [submodule "keepcourselist"]
 	path = local/keepcourselist
 	url = https://github.com/KEEP-EDU-HK/keepcourselist
+[submodule "moodle-filter_videoeasy"]
+	path = filter/videoeasy
+	url = https://github.com/justinhunt/moodle-filter_videoeasy
