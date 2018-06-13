@@ -4,3 +4,6 @@
 [submodule "moodle-mod_questionnaire"]
 	path = mod/questionnaire
 	url = https://github.com/PoetOS/moodle-mod_questionnaire
+[submodule "local/moodle-local_youtube_events"]
+	path = local/youtube_events
+	url = https://github.com/KEEP-EDU-HK/moodle-local_youtube_events
