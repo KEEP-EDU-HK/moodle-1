@@ -1,0 +1,3 @@
+[submodule "moodle-qtype_matrix"]
+	path = question/type/matrix
+	url = https://github.com/ndunand/moodle-qtype_matrix
